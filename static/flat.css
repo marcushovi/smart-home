@@ -1,0 +1,74 @@
+body, html {
+  			height: 100%;
+			margin: 0 0 0 0;
+		}
+		#byt
+		{
+			position: relative; /* This make the size of the children relative to this element, not the body. */
+			background-color: #868686;
+			width: 100%;
+			height: 100%;
+		}
+		#byt > div
+		{
+			display:flex;
+			justify-content:center;
+			align-items:center;
+		}
+		#levyHorniPokoj
+		{
+			position: absolute;
+			height: 50%;
+			width: 20%;
+			background-color: #F6AD55;
+		}
+		#levyDolniPokoj
+		{
+			position: absolute;
+			top: 50%;
+			height: 50%;
+			width: 20%;
+			background-color: #B794F4;
+		}
+		#pravyHorniPokoj
+		{
+			position: absolute;
+			left: 80%;
+			height: 50%;
+			width: 20%;
+			background-color: #FC8181;
+		}
+		#pravyDolniPokoj
+		{
+			position: absolute;
+			left: 80%;
+			top: 50%;
+			height: 50%;
+			width: 20%;
+			background-color: #4FD1C5;
+		}
+		#levaSpolenaMistnost
+		{
+			position: absolute;
+			left: 20%;
+			height: 35%;
+			width: 30%;
+			background-color: #68D391;
+		}
+		#pravaSpolecnaMistnost
+		{
+			position: absolute;
+			left: 50%;
+			height: 35%;
+			width: 30%;
+			background-color: #F6E05E;
+		}
+		#obyvak
+		{
+			position: absolute;
+			left: 20%;
+			top: 35%;
+			height: 65%;
+			width: 60%;
+			background-color: #F687B3;
+		}

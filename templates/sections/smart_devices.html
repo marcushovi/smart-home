@@ -1,0 +1,114 @@
+<h2 class="text-4xl font-bold text-gray-900 mt-20">
+    Smart Zariadenia
+</h2>
+<div class="border-4 border-dashed border-gray-200 rounded-lg h-96 p-6 my-9 h-auto inline-block min-w-full">
+    <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Device
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Device type
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Current state
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Notes
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Power Usage
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Power usage coefficient
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                scope="col">
+                                Power usage last recalculated
+                            </th>
+                            <th class="relative px-6 py-3" scope="col">
+                                <span class="sr-only">Edit</span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                        {% for key in devices %}
+                        {% for device in devices[key] %}
+                        <tr>
+                            <td class="px-6 py-4 ">
+                                <div class="flex items-center">
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ device['notes']['room'] }}
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ device['notes']['owner'] }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="px-6 py-4 ">
+                                <div class="text-sm text-gray-900">{{ device['type'] }}</div>
+                            </td>
+                            <td class="px-6 py-4  text-left text-sm font-medium">
+                                {% if device['current_state'] %}
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">ON</span>
+
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">{{  device['color_temperature'] }}K</span>
+                                {% else %}
+                                {% if device['current_state'] == False %}
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">OFF</span>
+                                {%endif%}
+                                {%endif%}
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500 ">
+                                <p class=" max-w-xs"> {{ device['notes'] }}</p>
+                                {% if device['type'] == "MotionSensor" %}
+                                <p class=" max-w-xs"> Last triggered -> {{ device['last_triggered_date']
+                                    }}</p>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4  text-sm text-gray-500">
+                                {{ device['power_usage'] }}
+                            </td>
+                            <td class="px-6 py-4  text-sm text-gray-500">
+                                {{ device['power_usage_coefficient'] }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ device['power_usage_last_recalculated_date'] }}
+                            </td>
+                            <td class="px-6 py-4  text-right text-sm font-medium">
+                                {% for key in device['actions'] %}
+                                {% if (device['notes']['owner'] == user or device['notes']['owner'] == "every") and key
+                                != "device_info" and key != "set_notes_POST" and key != "change_report_url" %}
+                                <button class="text-indigo-600 hover:text-indigo-900"
+                                        onclick="changeStateOfLight('{{ '/' + device['notes']['owner'] + '/device/' + device['id'] + '/' + key }}');">
+                                    {{key}}
+                                </button>
+                                </br>
+                                {%endif%}
+                                {%endfor%}
+                            </td>
+                        </tr>
+                        {%endfor%}
+                        {%endfor%}
+                        <!-- More people... -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
