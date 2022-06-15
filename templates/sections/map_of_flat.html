@@ -1,0 +1,22 @@
+<h2 class="text-4xl font-bold text-gray-900 mt-20">
+    Mapa Bytu
+</h2>
+<div class="px-3 py-6 sm:px-0">
+    <div class="border-4 border-dashed border-gray-200 rounded-lg h-96 p-6 my-9">
+        <div class="text-black font-bold font-sans text-lg" id="byt">
+            {% for light in devices['lights'] %}
+            <div class="border-2" id="{{ light['notes']['css_id'] }}">
+                {{ light['notes']['room'] }}
+                <div class="pl-4">
+                    {% if light['current_state'] %}
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">ON</span>
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">{{ light['color_temperature'] }}K</span>
+                    {% else %}
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">OFF</span>
+                    {%endif%}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

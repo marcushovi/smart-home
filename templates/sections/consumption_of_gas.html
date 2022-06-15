@@ -1,0 +1,26 @@
+<h2 class="text-4xl font-bold text-gray-900 mt-20">
+    Spotreba plynu
+</h2>
+<div class="border-4 border-dashed border-gray-200 rounded-lg h-96 p-6 my-9 h-auto inline-block min-w-full">
+
+    <h3 class="text-xl text-gray-900 my-6 text-right">Total power usage -> {{ total_power_usage}}</h3>
+    {% for light in devices['lights']
+    if light['notes']['owner'] != 'every'
+    %}
+    <h3 class="text-4xl font-bold text-gray-900 mt-10 pb-8">
+        {{ light['notes']['owner']}}
+    </h3>
+    <div class="w-full bg-gray-200 rounded-full">
+        <div class="bg-blue-600 text-l font-medium text-blue-100 text-center p-2 leading-none rounded-l-full"
+             style="width: {{light['power_usage_percentage']}}%; min-width: 50px">
+            {{light['power_usage_percentage']}}%
+        </div>
+    </div>
+    {% endfor %}
+    <div class="text-center m-6 mt-10">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+                onclick="location.reload()">
+            Refresh
+        </button>
+    </div>
+</div>
